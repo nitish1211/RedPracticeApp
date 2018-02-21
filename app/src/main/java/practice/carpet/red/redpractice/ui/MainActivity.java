@@ -18,6 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 import practice.carpet.red.redpractice.R;
 import practice.carpet.red.redpractice.data.model.World;
 import practice.carpet.red.redpractice.data.remote.APIService;
+import practice.carpet.red.redpractice.data.remote.RedOkHTTPClient;
 import practice.carpet.red.redpractice.ui.adapter.PlacesAdapter;
 import retrofit2.Retrofit;
 
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl("http://www.androidbegin.com/tutorial/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(new RedOkHTTPClient().getOkHTTPClient())
                 .build();
 
         Log.d("Preparing","data");
@@ -81,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Intent intent = new Intent(context, ImageFullScreen.class);
                         intent.putExtra("IMAGE_URL", worldData.getWorld().get(position).getFlag());
                         startActivity(intent);
-
                     }
 
                     @Override
